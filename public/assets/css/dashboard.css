@@ -1,0 +1,205 @@
+/* ===== Dashboard & Reports Additional Styles ===== */
+
+/* 4-column stats grid */
+.stats-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* Charts row layout */
+.charts-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.chart-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 280px;
+}
+
+.chart-container-sm {
+    height: 220px;
+    max-width: 220px;
+    margin: 0 auto;
+}
+
+.chart-container-tall {
+    height: 340px;
+}
+
+/* Chart.js canvas */
+.chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Custom legend */
+.chart-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.84rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.legend-value {
+    color: var(--text-primary);
+    font-weight: 800;
+    margin-left: 2px;
+}
+
+/* Filter grid for reports */
+.filter-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+/* Print styles */
+@media print {
+    .sidebar, .topbar, .sidebar-toggle,
+    .theme-toggle, .toast-container,
+    .form-actions, .section-header .btn-neutral,
+    .section-header .btn-export,
+    #btnImprimir, #btnExportRelatorio,
+    .stats-grid, #resumoRelatorio {
+        display: none !important;
+    }
+
+    .main-content {
+        margin-left: 0 !important;
+    }
+
+    .page-content {
+        padding: 0 !important;
+    }
+
+    .card {
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+        background: #fff !important;
+        break-inside: avoid;
+    }
+
+    body, body.light-mode {
+        background: #fff !important;
+        color: #000 !important;
+    }
+
+    table th, table td {
+        color: #000 !important;
+        border-color: #ddd !important;
+    }
+
+    .id-pill {
+        background: #eee !important;
+        color: #333 !important;
+    }
+
+    .tag {
+        background: #eee !important;
+        color: #333 !important;
+        border-color: #ccc !important;
+    }
+}
+
+/* Empty chart state */
+.chart-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 8px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.chart-empty svg {
+    opacity: 0.25;
+}
+
+/* Report active filter tags */
+.active-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.filter-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--accent-glow);
+    border: 1px solid var(--border-hover);
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.filter-tag-label {
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+    .stats-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .charts-row {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 680px) {
+    .stats-grid-4 {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-container {
+        height: 220px;
+    }
+
+    .chart-container-tall {
+        height: 280px;
+    }
+}

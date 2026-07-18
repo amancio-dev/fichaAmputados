@@ -1,58 +1,237 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🏥 Ficha de Amputados
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistema web para cadastro e gerenciamento de fichas clínicas de pacientes amputados, desenvolvido com **Laravel 13** e **Tailwind CSS**.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📋 Sobre o Projeto
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+O **Ficha de Amputados** é uma aplicação web voltada para profissionais de saúde que precisam registrar e consultar informações clínicas de pacientes com amputações. O sistema permite cadastrar dados do paciente, classificar o nível de amputação por segmento corporal e gerar relatórios.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Funcionalidades
 
-## Learning Laravel
+- Cadastro completo de pacientes (nome, CPF, prontuário, data de nascimento, profissão, etc.)
+- Cálculo automático da idade a partir da data de nascimento
+- Registro do nível de amputação (membros superiores e inferiores)
+- Associação entre paciente e suas amputações
+- Listagem com busca e paginação
+- Atualização e exclusão de registros
+- Interface de relatórios
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🛠️ Tecnologias Utilizadas
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+| Camada | Tecnologia |
+|---|---|
+| Backend | PHP 8.3+, Laravel 13 |
+| Frontend | Blade Templates, Tailwind CSS 4, Vite 8 |
+| Banco de Dados | MySQL / SQLite |
+| Testes | PestPHP 4 |
+| ORM | Eloquent |
 
-## Agentic Development
+---
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## 🗂️ Estrutura do Banco de Dados
+
+### Tabela `paciente`
+
+| Campo | Tipo | Descrição |
+|---|---|---|
+| `id_paciente` | INT (PK) | Identificador único |
+| `nome` | VARCHAR(60) | Nome completo |
+| `genero` | VARCHAR(30) | Gênero do paciente |
+| `prontuario` | INT | Número do prontuário |
+| `cpf` | VARCHAR(15) | CPF (único) |
+| `data_nascimento` | VARCHAR(16) | Data de nascimento |
+| `idade` | INT | Calculada automaticamente |
+| `profissao` | VARCHAR(40) | Profissão |
+| `acompanhante` | VARCHAR(40) | Nome do acompanhante |
+| `data_avaliacao` | VARCHAR(16) | Data da avaliação clínica |
+
+### Tabela `nivel_amputacao`
+
+Registra o nível de amputação por segmento corporal. Cada campo representa um tipo de amputação e recebe um valor inteiro.
+
+**Membros Superiores:** `desarticulacao_ombro`, `transumeral`, `desarticulacao_cotovelo`, `transradial`, `desarticulacao_punho`, `parcial_mao`, `dedos_mao`
+
+**Membros Inferiores:** `desarticulacao_quadril`, `transfemoral`, `desarticulacao_joelho`, `transtibal`, `syme`, `parcial_pe`, `dedos_pe`
+
+**Outros campos:** `paciente_id` (FK), `direito`, `esquerdo`, `tempo_amputacao`, `lado_dominante`
+
+---
+
+## 🚀 Como Executar o Projeto
+
+### Pré-requisitos
+
+- PHP >= 8.3
+- Composer
+- Node.js >= 18
+- Banco de dados MySQL ou SQLite
+
+### Instalação (com o script automático)
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/seu-usuario/fichaAmputados.git
+cd fichaAmputados
+composer run setup
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+O script `setup` realiza automaticamente:
+1. `composer install`
+2. Copia o `.env.example` para `.env`
+3. Gera a chave da aplicação (`php artisan key:generate`)
+4. Executa as migrations (`php artisan migrate`)
+5. `npm install` e `npm run build`
 
-## Contributing
+### Instalação manual (passo a passo)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+# 1. Clone o repositório
+git clone https://github.com/seu-usuario/fichaAmputados.git
+cd fichaAmputados
 
-## Code of Conduct
+# 2. Instale as dependências PHP
+composer install
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# 3. Configure o ambiente
+cp .env.example .env
+php artisan key:generate
 
-## Security Vulnerabilities
+# 4. Configure o banco de dados no .env e execute as migrations
+php artisan migrate
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# 5. Instale as dependências JavaScript
+npm install
 
-## License
+# 6. Compile os assets
+npm run build
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Rodando em desenvolvimento
+
+```bash
+composer run dev
+```
+
+Isso inicia em paralelo:
+- Servidor PHP (`php artisan serve`)
+- Worker de filas (`php artisan queue:listen`)
+- Vite em modo watch (`npm run dev`)
+
+Acesse: **http://localhost:8000**
+
+---
+
+## 🔌 API REST
+
+A aplicação expõe uma API RESTful para gerenciamento de pacientes e amputações.
+
+### Pacientes — `/api/paciente`
+
+| Método | Endpoint | Descrição |
+|---|---|---|
+| GET | `/paciente` | Lista todos os pacientes (paginado, com busca) |
+| POST | `/paciente` | Cadastra um novo paciente |
+| GET | `/paciente/{id}` | Busca um paciente por ID |
+| PUT | `/paciente/{id}` | Atualiza os dados de um paciente |
+| DELETE | `/paciente/{id}` | Remove um paciente |
+
+**Parâmetro de busca:** `GET /paciente?busca=João` — pesquisa em nome, CPF, prontuário, etc.
+
+**Exemplo de corpo (POST/PUT):**
+```json
+{
+  "nome": "Maria da Silva",
+  "genero": "Feminino",
+  "prontuario": 12345,
+  "cpf": "123.456.789-00",
+  "data_nascimento": "1985-04-10",
+  "profissao": "Professora",
+  "acompanhante": "João Silva",
+  "data_avaliacao": "2026-07-17"
+}
+```
+
+---
+
+### Amputações — `/api/amputacao`
+
+| Método | Endpoint | Descrição |
+|---|---|---|
+| GET | `/amputacao` | Lista todas as amputações (paginado, com busca) |
+| GET | `/amputacao?paciente_id=1` | Lista amputações de um paciente específico |
+| POST | `/amputacao` | Cadastra uma nova amputação |
+| GET | `/amputacao/{id}` | Busca uma amputação por ID |
+| PUT | `/amputacao/{id}` | Atualiza uma amputação |
+| DELETE | `/amputacao/{id}` | Remove uma amputação |
+
+**Exemplo de corpo (POST/PUT):**
+```json
+{
+  "paciente_id": 1,
+  "transumeral": 1,
+  "transtibal": 1,
+  "direito": 1,
+  "esquerdo": 0,
+  "tempo_amputacao": "5 anos",
+  "lado_dominante": "Direito"
+}
+```
+
+> Os campos de nível de amputação recebem `1` (presente) ou `0` (ausente).
+
+---
+
+## 🧪 Testes
+
+```bash
+composer run test
+```
+
+Os testes utilizam o framework **PestPHP** com integração ao Laravel.
+
+---
+
+## 📁 Estrutura de Diretórios
+
+```
+fichaAmputados/
+├── app/
+│   ├── Http/Controllers/
+│   │   ├── PacienteController.php
+│   │   └── AmputacaoController.php
+│   └── Models/
+│       ├── Paciente.php
+│       └── Amputacao.php
+├── database/
+│   └── migrations/
+│       ├── ..._create_paciente_table.php
+│       └── ..._create_nivel_amputacao_table.php
+├── resources/
+│   └── views/
+│       ├── paciente.blade.php
+│       ├── dashboard.blade.php
+│       ├── relatorios.blade.php
+│       └── welcome.blade.php
+├── routes/
+│   └── web.php
+└── tests/
+```
+
+---
+
+## 🤝 Contribuindo
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature: `git checkout -b feature/minha-feature`
+3. Commit suas mudanças: `git commit -m 'feat: adiciona minha feature'`
+4. Envie para o repositório: `git push origin feature/minha-feature`
+5. Abra um Pull Request
+
+---
+
+## 📄 Licença
+
+Este projeto está sob a licença **MIT**. Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.

@@ -1,3 +1,5 @@
+![Ficha de Amputados — Amancio.dev](.github/assets/banner.svg)
+
 # 🏥 Ficha de Amputados
 
 Sistema web para cadastro e gerenciamento de fichas clínicas de pacientes amputados, desenvolvido com **Laravel 13** e **Tailwind CSS**.
@@ -73,7 +75,7 @@ Registra o nível de amputação por segmento corporal. Cada campo representa um
 ### Instalação (com o script automático)
 
 ```bash
-git clone https://github.com/seu-usuario/fichaAmputados.git
+git clone https://github.com/amancio-dev/fichaAmputados.git
 cd fichaAmputados
 composer run setup
 ```
@@ -89,7 +91,7 @@ O script `setup` realiza automaticamente:
 
 ```bash
 # 1. Clone o repositório
-git clone https://github.com/seu-usuario/fichaAmputados.git
+git clone https://github.com/amancio-dev/fichaAmputados.git
 cd fichaAmputados
 
 # 2. Instale as dependências PHP
@@ -234,4 +236,4 @@ fichaAmputados/
 
 ## 📄 Licença
 
-Este projeto está sob a licença **MIT**. Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
+Este repositório ainda não contém um arquivo de licença. Consulte o responsável pelo projeto antes de reutilizar ou distribuir o código.
